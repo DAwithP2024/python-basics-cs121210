@@ -31,42 +31,75 @@ products = {
 }
 
 
-def display_sorted_products(products_list, sort_order):
-    pass
+def display_categories():
+    """Displays available categories."""
+    print("Available categories:")
+    for index, category in enumerate(products.keys(), start=1):
+        print(f"{index}. {category}")
+    try:
+        category_choice = int(input("Please select a category by number: ")) - 1
+        return category_choice
+    except ValueError:
+        return None
 
 
 def display_products(products_list):
-    pass
+    """Displays products in the chosen category."""
+    print("Available products:")
+    for index, (product_name, product_price) in enumerate(products_list, start=1):
+        print(f"{index}. {product_name} - ${product_price:.2f}")
 
 
-def display_categories():
-    pass
+def display_sorted_products(products_list, sort_order):
+    """Sorts and returns products based on the sort order."""
+    if sort_order == "asc":
+        sorted_products = sorted(products_list, key=lambda x: x[1])  
+    else:
+        sorted_products = sorted(products_list, key=lambda x: x[1], reverse=True)  
+    return sorted_products
 
 
 def add_to_cart(cart, product, quantity):
-    pass
+    """Adds a product to the cart."""
+    cart.append((product[0], product[1], quantity))  
+
 
 def display_cart(cart):
-    pass
+    """Displays the items in the cart and returns the total cost."""
+    total_cost = 0
+    for product, price, quantity in cart:
+        product_total = price * quantity
+        total_cost += product_total
+        print(f"{product} - ${price} x {quantity} = ${product_total}")
+    print(f"Total cost: ${total_cost}")
+    return total_cost
 
 
 def generate_receipt(name, email, cart, total_cost, address):
-    pass
+    """Generates and displays a receipt."""
+    print(f"\nCustomer: {name}")
+    print(f"Email: {email}")
+    print("Items Purchased:")
+    for product, price, quantity in cart:
+        print(f"{quantity} x {product} - ${price} = ${price * quantity}")
+    print(f"Total: ${total_cost}")
+    print(f"Delivery Address: {address}")
+    print("Your items will be delivered in 3 days.")
+    print("Payment will be accepted upon delivery.")
 
 
 def validate_name(name):
-    pass
+    """Validates that the name contains first and last names, and is alphabetic."""
+    if len(name.split()) == 2 and all(part.isalpha() for part in name.split()):
+        return True
+    return False
+
 
 def validate_email(email):
-    pass
+    """Validates that the email contains '@'."""
+    return "@" in email
 
 
 def main():
-    pass
-    
-
-""" The following block makes sure that the main() function is called when the program is run. 
-It also checks that this is the module that's being run directly, and not being used as a module in some other program. 
-In that case, only the part that's needed will be executed and not the entire program """
-if __name__ == "__main__":
-    main()
+    """Main shopping function."""
+    pass  # Placeholder for the main function that will be used in testing
